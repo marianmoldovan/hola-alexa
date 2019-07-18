@@ -21,4 +21,4 @@ Vamos a crear nuestra skill del jardinero
 * Modelo de skill. Selecciona **Custom**
 * Método de hospedake. Elegimos **Alexa-Hosted**
 
-![New Alexa Skill](https://github.com/marianmoldovan/hola-alexa/blob/master/images/new-skill.png)
+![New Alexa Skill](https://github.com/marianmoldovan/hola-alexa/blob/master/images/new-skill.jpg)
