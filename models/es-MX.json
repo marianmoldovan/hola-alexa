@@ -1,0 +1,128 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "el jardinero",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "PlantCareIntent",
+          "slots": [
+            {
+              "name": "Plant",
+              "type": "Plant",
+              "samples": [
+                "{Plant}"
+              ]
+            }
+          ],
+          "samples": [
+            "Cuanto riego necesita {Plant}",
+            "Cuanto agua tengo que darle al {Plant}",
+            "Como cuido de un {Plant}",
+            "Como cuidar un {Plant}",
+            "Como cuidar una planta",
+            "Como cuidar un helecho",
+            "cuando agua tengo que darle al telefono",
+            "Cuanto agua hay que darle al helecho"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "values": [
+            {
+              "id": "lengua",
+              "name": {
+                "value": "Lengua de vaca",
+                "synonyms": [
+                  "Espada del rey",
+                  "Lengua de Suegra",
+                  "Lengua de tigre"
+                ]
+              }
+            },
+            {
+              "id": "peperonia",
+              "name": {
+                "value": "Peperonia"
+              }
+            },
+            {
+              "id": "suculenta",
+              "name": {
+                "value": "Suculenta"
+              }
+            },
+            {
+              "id": "cactus",
+              "name": {
+                "value": "Cactus"
+              }
+            },
+            {
+              "id": "telefono",
+              "name": {
+                "value": "Teléfono"
+              }
+            },
+            {
+              "id": "helecho",
+              "name": {
+                "value": "Helecho"
+              }
+            }
+          ],
+          "name": "Plant"
+        }
+      ]
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "PlantCareIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "Plant",
+              "type": "Plant",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.783728527217.151438775560"
+              }
+            }
+          ]
+        }
+      ],
+      "delegationStrategy": "ALWAYS"
+    },
+    "prompts": [
+      {
+        "id": "Elicit.Slot.783728527217.151438775560",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿De qué planta quieres que te diga los cuidados?"
+          }
+        ]
+      }
+    ]
+  },
+  "version": "4"
+}

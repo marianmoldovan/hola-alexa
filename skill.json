@@ -1,0 +1,19 @@
+{
+  "manifest": {
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "uri": ""
+        },
+        "interfaces": []
+      }
+    },
+    "publishingInformation": {
+      "locales": {
+        "es-MX": {
+          "name": "el jardinero"
+        }
+      }
+    }
+  }
+}
