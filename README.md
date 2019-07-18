@@ -7,7 +7,8 @@ El objetivo de este taller es del de aprender a desarrollar una skill muy sencil
 #### 1. Regístrate en [Amazon Developer](developer.amazon.com) para poder comenzar a desarrollar
 #### 2. Una vez que estás registrado, ve al [Dashboard de Alexa Skills](https://developer.amazon.com/alexa/console/ask)
 
-##### TODO: Imagen dashboard
+![Alexa Dashboard](https://github.com/marianmoldovan/hola-alexa/blob/master/images/dashboard-alexa.png)
+
 
 ### Paso 2. Crear una nueva Skill
 
@@ -19,3 +20,5 @@ Vamos a crear nuestra skill del jardinero
 * Idioma por defecto. Seleccionamos **Spanish (MX)**
 * Modelo de skill. Selecciona **Custom**
 * Método de hospedake. Elegimos **Alexa-Hosted**
+
+![New Alexa Skill](https://github.com/marianmoldovan/hola-alexa/blob/master/images/new-skill.png)
