@@ -22,3 +22,40 @@ Vamos a crear nuestra skill del jardinero
 * Método de hospedake. Elegimos **Alexa-Hosted**
 
 ![New Alexa Skill](https://github.com/marianmoldovan/hola-alexa/blob/master/images/new-skill.jpg)
+
+### Paso 3. Modelo de interacción. Intents y Slots
+
+Vamos a crear nuestro modelo de interacción conversacional. Vamos a crear un intent y un slot para poder dar funcionalidad a nuestra Skill.
+
+#### 1. Primero editamos el nombre de invocación de la skill, ¿como vamos a llamar a nuestra skill? Pongamos "el jardinero"
+
+![Invocation name](https://github.com/marianmoldovan/hola-alexa/blob/master/images/invocation-name.png)
+
+#### 2. Intents
+
+Por defecto, la plataforma nos da los 4 intents obligatorios, *AMAZON.CancelIntent*, *AMAZON.HelpIntent*, *AMAZON.StopIntent*, *AMAZON.NavigateHomeIntent* y *HelloWorldIntent*.
+
+Borramos el intent **HelloWorldIntent**, es un intent que se nos crea por defecto, como un Hello World, no lo vamos a necesitar.
+
+![Delete and add intent](https://github.com/marianmoldovan/hola-alexa/blob/master/images/delete-add.png)
+
+Creamos un nuevo Intent de tipo **Custom** al cual llamaremos **PlantCareIntent**. Éste es el intent que queremos que sea detectado cuando los usuarios soliciten el cuidado de una planta.
+
+![Custom intent](https://github.com/marianmoldovan/hola-alexa/blob/master/images/custom-intent.png)
+
+Ahora tenemos que añadir frases de ejemplo de entrenamiento. Tenemos que pensar de qué manera (la más natural posible) alguien pediria instrucciones de cuidado de una planta. Añadimos algunos ejemplos como:
+* *Cuidados de una flor*
+* *Cuidar una planta*
+* *Dime los cuidados de una planta*
+* *Cuanto sol le hace falta a una flor*
+* *Cuanto agua necesita un helecho*
+
+![Utterances](https://github.com/marianmoldovan/hola-alexa/blob/master/images/utterances.png)
+
+A continuación le damos a **Save model** y seguidamente a **Build model**. Va a tardar unos segundos, lo qué pasa durante este tiempo de espera es qué la plataforma de NLU de Alexa construye el modelo conversacional.
+
+![Utterances](https://github.com/marianmoldovan/hola-alexa/blob/master/images/save-build.png)
+
+Ahora podemos probar el modelo y comprobar si funciona. Pulsamos el botón **Utterance profiler** e introducimos alguna frase similar, como *Como cuido de un cactus*, si todo ha ido bien, nos va a indicar el Intent detectado.
+
+![Utterance profiler](https://github.com/marianmoldovan/hola-alexa/blob/master/images/utterance-profiler.png)
