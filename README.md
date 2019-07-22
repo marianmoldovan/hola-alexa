@@ -116,3 +116,92 @@ Y ya tenemos nuestro modelo de interacción conversacional, solamente le damos a
 ### Paso 4. Código
 
 Es hora de darle vida a nuestra Skill. Para eso vamos a utilizar la librería Alexa Skills Kit de Javascript/Node.JS y los recursos de cómputo hospedados por Alexa (en AWS).
+
+Para ello nos vamos a la pestaña **Code** de nuestra Skill.
+
+![Code tab](https://github.com/marianmoldovan/hola-alexa/blob/master/images/code-tab.png)
+
+Por defecto, la plataforma nos deja el código para responder al usuario a los Intents obligatorios del sistema y al HelloWorldIntent que hemos borrado antes. Además, también nos deja el código del evento cuando el usuario activa la Skill, se trata del método **LaunchRequestHandler**. Igualmente pasa con el método **ErrorHandler**, si ocurre algún error con nuestra skill, saltará ese evento y la interacción que programemos ahí es lo que le llegará al usuario.
+
+#### 1. Crear el handler para el intent PlantCareIntent
+
+Vamos a crear un nuevo handler para poder responder al usuario cuando el Intent **PlantCareIntent** sea detectado. En el fichero **index.js** añadimos el siguiente código despues del LaunchRequest:
+
+```
+const PlantCareIntentHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+            && handlerInput.requestEnvelope.request.intent.name === 'PlantCareIntent';
+    },
+    handle(handlerInput) {
+        const speechText = 'El intent PlantCareIntent ha sido detectado';
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .reprompt(speechText)
+            .getResponse();
+    }
+};
+```
+
+#### 2. Registrar el Handler
+
+Y en la lista de handlers registrados añadimos el recien creado, por lo tanto, las últimas lineas del fichero **index.js** quedarían así:
+
+```
+exports.handler = Alexa.SkillBuilders.custom()
+    .addRequestHandlers(
+        LaunchRequestHandler,
+        PlantCareIntentHandler,
+        HelpIntentHandler,
+        CancelAndStopIntentHandler,
+        SessionEndedRequestHandler,
+        IntentReflectorHandler) // make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
+    .addErrorHandlers(
+        ErrorHandler)
+    .lambda();
+```
+
+#### 3. Añadir lógica al Handler
+
+Creamos un nuevo fichero, llamado **plants.js** en la carpeta lambda y copiamos el código disponible [aquí](https://raw.githubusercontent.com/marianmoldovan/hola-alexa/master/lambda/plants.js). Le damos a guardar y volvemos al fichero **index.js**.
+
+Importamos la libreria que acabamos de crear usando el código:
+
+```const plants = require('./plants')```
+
+Y posteriormente actualizamos el handler PlantCareIntentHandler con el siguiente código:
+
+```
+const PlantCareIntentHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+            && handlerInput.requestEnvelope.request.intent.name === 'PlantCareIntent';
+    },
+    handle(handlerInput) {
+        // Obtenemos el valor del Slot Plant
+        let plant = handlerInput.requestEnvelope.request.intent.slots.Plant.value
+        // Buscamos la planta en nuestra 'base de datos'
+        let plantCaring = plants.findPlant(plant)
+        let speechText = 'Vaya, no conozco la planta ' + plant + ', intenta con otra.'
+        // Si conocemos la planta construimos el texto con los cuidados
+        if(plantCaring) {
+            speechText = 'Hay que regarla ' + plantCaring.agua + '. Recuerda que es una planta de ' + plantCaring.sol
+        }
+        // Retornamos la respuesta al usuario
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .reprompt(speechText)
+            .getResponse();
+    }
+};
+```
+
+También vamos a cambiar el mensaje de bienvenida cuando el usuario abre la skill. Para ello, nos vamos a la función **LaunchRequestHandler** y cambiamos la variable **speechText** a algo como: *Hola, soy el jardinero, te ayudo a cuidar tus plantas.*
+
+Le damos al botón de **Save** y posteriormente a **Deploy**. Esto va a desplegar nuestro código en una función Lambda y lo va a dejar listo para poder probar nuestra Skill.
+
+### Paso 5. Probar nuestra skill
+
+Llegó el momento de probar nuestra skill, para ello, nos vamos a la pestaña **Test** de la consola de Alexa Developer. Habilitamos el testing para desarrollo y a continuación podemos interactuar con la consola como si fuese un dispositivo Alexa. Por lo tanto, primero tenemos que invocar la skill diciéndole algo como: 'Abre la skill el jardinero'. Posteriormente le podemos preguntar 'Como cuidar una planta' y probar toda la interacción que hemos desarrollado.
+
+![Alexa test](https://github.com/marianmoldovan/hola-alexa/blob/master/images/alexa-test.png)
