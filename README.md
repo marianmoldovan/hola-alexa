@@ -205,3 +205,53 @@ Le damos al botón de **Save** y posteriormente a **Deploy**. Esto va a desplega
 Llegó el momento de probar nuestra skill, para ello, nos vamos a la pestaña **Test** de la consola de Alexa Developer. Habilitamos el testing para desarrollo y a continuación podemos interactuar con la consola como si fuese un dispositivo Alexa. Por lo tanto, primero tenemos que invocar la skill diciéndole algo como: 'Abre la skill el jardinero'. Posteriormente le podemos preguntar 'Como cuidar una planta' y probar toda la interacción que hemos desarrollado.
 
 ![Alexa test](https://github.com/marianmoldovan/hola-alexa/blob/master/images/alexa-test.png)
+
+
+## Hasta aquí has aprendido a desarrollar una Skill sencilla, 100% funcional, los siguientes pasos son opcionales, para mejorar la skill.
+
+### Mejora 1. Cambiar textos
+
+Volvamos un momento al código de la skill. Busca todos los textos devueltos al usuario y cambialos con algo que tenga más sentido. Vé al fichero **index.js** y escribe otros textos, en español.
+
+### Mejora 2. Añadir aleatoriedad en los textos
+
+Vamos a añadir más textos para cada Intent para que la interacción no sea tan monòtona, para no responderle siempre con la misma frase. Para ello añadimos en el fichero **index.js** el siguiente código:
+
+```
+Array.prototype.randomElement = function () {
+    return this[Math.floor(Math.random() * this.length)]
+}
+```
+
+Esto va a añadirle un método a las listas para poder elegir aleatoriamente un elemente. Por lo tanto, ahora, en cada handler, en lugar de tener un solo texto, podemos tener varios y elegir uno aleatoriamente. Por ejemplo, en el **LaunchRequestHandler** podríamos tener lo siguiente:
+```
+const LaunchRequestHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
+    },
+    handle(handlerInput) {
+        const availableTexts = [
+            'Hola, soy el jardinero, te ayudo a cuidar de tus plantas',
+            'Buenas, soy el qué sabe de plantas, el jardinero',
+            'Aquí el jardinero, ¿en qué puedo ayudarte amante de las plantas?'
+        ]
+        const speechText = availableTexts.randomElement()
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .reprompt(speechText)
+            .getResponse();
+    }
+};
+```
+
+De manera que el saludo inicial de la skill ya no va a ser siempre el mismo. Cambia algún intent más, como el de despedida o de ayuda.
+
+Si quieres más información de como gestionar de manera más elegante los textos y las localización de ellos, [aquí](https://developer.amazon.com/es-mx/blogs/alexa/post/285a6778-0ed0-4467-a602-d9893eae34d7/how-to-localize-your-alexa-skills) tienes una buena guía de Amazon.
+
+### Mejora 3. Más funcionalidades
+
+Vamos a extender la skill. En lugar de tener un solo Intent para el sol y el riego necesario, vamos a crear dos Intents diferentes, uno que indiqué solo el riego necesario y otro que indiqué la luz que necesita una planta.
+
+### 1. Crea un Intent llamado **WaterIntent** y otro llamado **LightIntent**
+### 2. Añade los textos de entrenamiento (utterances)
+### 3. Implementa los handlers para responder a dichos Intents
