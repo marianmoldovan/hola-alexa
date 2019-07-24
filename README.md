@@ -64,7 +64,7 @@ Ahora podemos probar el modelo y comprobar si funciona. Pulsamos el botón **Utt
 
 Vamos a crear un slot para detectar el tipo de planta al que se refiere el usuario. Para eso necesitamos crear un Slot a medida, custom. Nos vamos a la opción **Slot Types** del menu de la izquierda y le damos al botón de **Add**. Le ponemos el nombre de **Plant** y lo creamos.
 
-![Add slot](https://github.com/marianmoldovan/hola-alexa/blob/master/images/add-slot.png)
+![Add slot](https://github.com/marianmoldovan/hola-alexa/blob/master/images/add-slot.jpg)
 
 Ahora toca escribir los valores de nuesto slot. Vamos a definir el número máximo de valores para qué la detección se lo más eficiente posible. Puedes irte al fichero json con las plantas para hacerte una idea de algunos nombres, [plants.json](https://github.com/marianmoldovan/hola-alexa/blob/master/lambda/plants.js). Añade por lo menos algunos, como:
 * *Peperonia*
